@@ -1,0 +1,35 @@
+components:
+  schemas:
+    Products:
+      type: array
+      items:
+        $ref: '#/components/schemas/Product'
+      xml:
+        name: Products
+        wrapped: true
+    Product:
+      description: toy product
+      type: object
+      required:
+        - name
+        - price
+      properties:
+        name:
+          type: string
+        price:
+          type: number
+      xml:
+        name: Product
+  responses:
+    ProductsXml:
+      description: OK
+      content:
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Products'
+    ProductsJson:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Products'

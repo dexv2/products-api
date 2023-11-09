@@ -1,0 +1,14 @@
+openapi: '3.0.3'
+info:
+  title: 'Products API'
+  version: '1.0.0'
+tags:
+  - name: kidsworld
+    description: kids world toys
+  - name: toyuniverse
+    description: toy universe toys
+  - name: toyshop
+    description: toy shop toys
+externalDocs:
+  url: https://github.com/dexv2
+  description: Toy products documentation

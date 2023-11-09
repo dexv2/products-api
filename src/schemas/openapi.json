@@ -1,0 +1,173 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Products API",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "kidsworld",
+      "description": "kids world toys"
+    },
+    {
+      "name": "toyuniverse",
+      "description": "toy universe toys"
+    },
+    {
+      "name": "toyshop",
+      "description": "toy shop toys"
+    }
+  ],
+  "externalDocs": {
+    "url": "https://github.com/dexv2",
+    "description": "Toy products documentation"
+  },
+  "paths": {
+    "/api/kidsworld": {
+      "get": null,
+      "description": "Get toy products from kids world",
+      "operationId": "kidsWorld",
+      "tags": [
+        "kidsworld"
+      ],
+      "responses": {
+        "200": {
+          "$ref": "#/components/responses/ProductsXml"
+        },
+        "404": {
+          "$ref": "#/components/responses/NotFoundError"
+        },
+        "500": {
+          "$ref": "#/components/responses/InternalServerError"
+        }
+      }
+    },
+    "/api/toyshop": {
+      "get": null,
+      "description": "Get toy products from toy shop",
+      "operationId": "toyShop",
+      "tags": [
+        "toyshop"
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "content": {
+            "text/csv": {}
+          }
+        },
+        "404": {
+          "$ref": "#/components/responses/NotFoundError"
+        },
+        "500": {
+          "$ref": "#/components/responses/InternalServerError"
+        }
+      }
+    },
+    "/api/toyuniverse": {
+      "get": null,
+      "description": "Get toy products from toy universe",
+      "operationId": "toyUniverse",
+      "tags": [
+        "toyuniverse"
+      ],
+      "responses": {
+        "200": {
+          "$ref": "#/components/responses/ProductsJson"
+        },
+        "404": {
+          "$ref": "#/components/responses/NotFoundError"
+        },
+        "500": {
+          "$ref": "#/components/responses/InternalServerError"
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ErrorModel": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "Products": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Product"
+        },
+        "xml": {
+          "name": "Products",
+          "wrapped": true
+        }
+      },
+      "Product": {
+        "description": "toy product",
+        "type": "object",
+        "required": [
+          "name",
+          "price"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          }
+        },
+        "xml": {
+          "name": "Product"
+        }
+      }
+    },
+    "responses": {
+      "InternalServerError": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorModel"
+            }
+          }
+        }
+      },
+      "NotFoundError": {
+        "description": "Not Found Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorModel"
+            }
+          }
+        }
+      },
+      "ProductsXml": {
+        "description": "OK",
+        "content": {
+          "application/xml": {
+            "schema": {
+              "$ref": "#/components/schemas/Products"
+            }
+          }
+        }
+      },
+      "ProductsJson": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Products"
+            }
+          }
+        }
+      }
+    }
+  }
+}
